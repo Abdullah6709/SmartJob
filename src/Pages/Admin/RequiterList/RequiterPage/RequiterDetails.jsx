@@ -1,36 +1,54 @@
 import React from 'react';
 import {
   Box,
-  Avatar,
-  Typography,
   Button,
   Stack,
-  Chip,
-  Link,
   Divider,
+  useTheme
 } from '@mui/material';
 import TabsPanel from './TabsPanel';
 
-const RequiterDetails = ({ requiter }) => {
+const RequiterDetails = ({ requiter, onClose }) => {
+  const theme = useTheme();
+
   return (
     <Box>
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <Avatar src={requiter.image} sx={{ width: 56, height: 56 }} />
-        <Box>
-          <Typography variant="h6">{requiter.name}</Typography>
-          <Typography color="text.secondary">{requiter.position}</Typography>
-        </Box>
-        <Box ml="auto">
-          <Button variant="contained" color="primary" sx={{ mr: 1 }}>
-            Accept
-          </Button>
-          <Button variant="outlined" color="error">
+      <TabsPanel requiter={requiter} onClose={onClose} />
+      
+      <Divider sx={{ mx: 3 }} />
+      
+      <Box p={3}>
+        <Stack direction="row" spacing={2} justifyContent="flex-end">
+          <Button 
+            variant="outlined" 
+            color="error"
+            sx={{
+              px: 4,
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600
+            }}
+          >
             Reject
           </Button>
-        </Box>
-      </Stack>
-
-      <TabsPanel requiter={requiter} />
+          <Button 
+            variant="contained" 
+            color="primary"
+            sx={{
+              px: 4,
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+              boxShadow: theme.shadows[2],
+              '&:hover': {
+                boxShadow: theme.shadows[4]
+              }
+            }}
+          >
+            Accept Contact
+          </Button>
+        </Stack>
+      </Box>
     </Box>
   );
 };
